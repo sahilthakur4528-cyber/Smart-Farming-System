@@ -1,0 +1,11 @@
+﻿Crop,Fertilizer,Quantity,Method
+Rice,DAP,50 kg/acre,Apply before sowing
+Wheat,Urea,45 kg/acre,Apply after 20 days of sowing
+Maize,NPK 20:20:0,40 kg/acre,Apply at sowing
+Cotton,NPK 19:19:19,40 kg/acre,Apply at planting
+Sugarcane,Urea + Potash,60 kg/acre,Apply in two splits
+Soybean,DAP,40 kg/acre,Apply before sowing
+Tomato,NPK 19:19:19,30 kg/acre,Apply every 20 days
+Potato,MOP + Urea,50 kg/acre,Apply before earthing
+Onion,DAP + Potash,35 kg/acre,Apply in split doses
+Groundnut,SSP,45 kg/acre,Apply before sowing

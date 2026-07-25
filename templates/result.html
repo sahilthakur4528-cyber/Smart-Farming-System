@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Result</title>
+
+<style>
+
+body{
+
+font-family:Arial;
+background:#e8f5e9;
+
+}
+
+.container{
+
+width:500px;
+margin:40px auto;
+background:white;
+padding:25px;
+border-radius:10px;
+box-shadow:0px 0px 10px gray;
+
+}
+
+h2{
+
+color:green;
+text-align:center;
+
+}
+
+p{
+
+font-size:18px;
+
+}
+
+button{
+
+width:100%;
+padding:12px;
+background:green;
+color:white;
+border:none;
+font-size:16px;
+cursor:pointer;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>🌾 Prediction Result</h2>
+
+<p><b>Recommended Crop:</b> {{ crop }}</p>
+
+<p><b>Recommended Fertilizer:</b> {{ fertilizer }}</p>
+
+<p><b>Quantity:</b> {{ quantity }}</p>
+
+<p><b>Application Method:</b> {{ method }}</p>
+
+<br>
+
+<a href="/download_pdf">
+    <button>📄 Download Report as PDF</button>
+</a>
+
+</div>
+
+</body>
+</html>

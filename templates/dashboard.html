@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Dashboard</title>
+
+    <style>
+
+        body{
+            margin:0;
+            font-family:Arial;
+            background:#e8f5e9;
+        }
+
+        .header{
+            background:green;
+            color:white;
+            text-align:center;
+            padding:20px;
+        }
+
+        .container{
+            width:80%;
+            margin:30px auto;
+        }
+
+        .profile{
+            background:white;
+            padding:20px;
+            border-radius:10px;
+            box-shadow:0px 0px 10px lightgray;
+            margin-bottom:25px;
+        }
+
+        .profile h2{
+            color:green;
+            text-align:center;
+            margin-bottom:25px;
+        }
+
+        .profile p{
+            font-size:18px;
+            margin:15px 0;
+        }
+
+        .menu{
+            background:white;
+            padding:20px;
+            border-radius:10px;
+            box-shadow:0px 0px 10px lightgray;
+            text-align:center;
+        }
+
+        button{
+            width:250px;
+            padding:12px;
+            margin:10px;
+            background:green;
+            color:white;
+            border:none;
+            border-radius:5px;
+            font-size:16px;
+            cursor:pointer;
+        }
+
+        button:hover{
+            background:darkgreen;
+        }
+
+        .footer{
+            margin-top:40px;
+            background:green;
+            color:white;
+            text-align:center;
+            padding:15px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="header">
+
+<h1>🌱 Smart Farming Advisory System</h1>
+
+<h3>Welcome, {{ user.full_name }}</h3>
+
+</div>
+
+<div class="container">
+
+<div class="profile">
+
+<h2>👨 Farmer Information</h2>
+
+<p><b>👨 Farmer Name :</b> {{ user.full_name }}</p>
+
+<p><b>📧 Email :</b> {{ user.email }}</p>
+
+<p><b>📱 Mobile :</b> {{ user.mobile }}</p>
+
+<p><b>🌍 Village :</b> {{ profile.village }}</p>
+
+<p><b>🏙 District :</b> {{ profile.district }}</p>
+
+<p><b>🌎 State :</b> {{ profile.state }}</p>
+
+<p><b>🌱 Soil Type :</b> {{ profile.soil_type }}</p>
+
+<p><b>🌾 Land Area :</b> {{ profile.land_area }} Acres</p>
+
+</div>
+
+<div class="menu">
+
+<h2>Dashboard</h2>
+
+<a href="/prediction">
+<button>🌾 Crop Recommendation</button>
+</a>
+
+<a href="#">
+<button>📄 Download Report</button>
+</a>
+
+<a href="/logout">
+<button>🚪 Logout</button>
+</a>
+
+</div>
+
+</div>
+
+<div class="footer">
+
+🌾 Wishing You a Healthy Crop and Good Harvest! 🌾
+
+</div>
+
+</body>
+</html>
