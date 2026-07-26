@@ -7,7 +7,7 @@ def get_connection():
             host=os.environ.get("sql8.freesqldatabase.com"),
             user=os.environ.get("sql8833866"),
             password=os.environ.get("7ngE1JEQJN"),
-            database=os.environ.get("smart_farming_db"),
+            database=os.environ.get("sql8833866"),
             port=int(os.environ.get("MYSQL_PORT", 3306))
         )
         return conn
