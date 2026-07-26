@@ -1,0 +1,10 @@
+Crop,Rainfall_Min,Rainfall_Max,Temperature_Max,Advice
+Rice,0,50,40,Irrigate every 2 days
+Rice,51,100,40,Irrigate every 4 days
+Rice,101,500,40,No irrigation required
+Wheat,0,30,35,Irrigate every 7 days
+Wheat,31,80,35,Irrigate every 10 days
+Wheat,81,500,35,No irrigation required
+Maize,0,40,35,Irrigate every 5 days
+Maize,41,100,35,Irrigate every 8 days
+Maize,101,500,35,No irrigation required
