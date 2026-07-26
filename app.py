@@ -5,9 +5,10 @@ import pandas as pd
 
 from flask import make_response
 from reportlab.pdfgen import canvas
-from reportlab.lib import colors      # <-- Add this
+from reportlab.lib import colors      
 from io import BytesIO
-from datetime import datetime         # <-- Add this
+from datetime import datetime         
+from irrigation import irrigation_advice
 app = Flask(__name__)
 
 # Secret Key
@@ -203,7 +204,7 @@ def prediction():
         rainfall = float(request.form["rainfall"])
         ph = float(request.form["ph"])
 
-        # ML Prediction
+        # ML Crop Prediction
         crop = predict_crop(
             nitrogen,
             phosphorus,
@@ -214,7 +215,14 @@ def prediction():
             ph
         )
 
+        # ===============================
+        # Irrigation Advice
+        # ===============================
+        irrigation = irrigation_advice(crop, rainfall)
+
+        # ===============================
         # Read Fertilizer Dataset
+        # ===============================
         df = pd.read_csv("fertilizer_dataset.csv")
 
         fertilizer = df[df["Crop"] == crop]
@@ -228,13 +236,14 @@ def prediction():
             quantity = "Not Available"
             method = "Not Available"
 
-        # ==========================
-        # Save data in session
-        # ==========================
+        # ===============================
+        # Save Data in Session
+        # ===============================
         session["crop"] = crop
         session["fertilizer"] = fertilizer_name
         session["quantity"] = quantity
         session["method"] = method
+        session["irrigation"] = irrigation
 
         session["nitrogen"] = nitrogen
         session["phosphorus"] = phosphorus
@@ -244,13 +253,16 @@ def prediction():
         session["rainfall"] = rainfall
         session["ph"] = ph
 
+        # ===============================
         # Show Result
+        # ===============================
         return render_template(
             "result.html",
             crop=crop,
             fertilizer=fertilizer_name,
             quantity=quantity,
-            method=method
+            method=method,
+            irrigation=irrigation
         )
 
     return render_template("prediction.html")
@@ -479,13 +491,13 @@ def download_pdf():
     pdf.setFillColor(colors.lightgreen)
 
     pdf.roundRect(
-        40,
-        220,
-        510,
-        70,
-        10,
-        fill=1
-    )
+    40,
+    190,
+    510,
+    100,
+    10,
+    fill=1
+)
 
     pdf.setFillColor(colors.black)
 
@@ -509,6 +521,12 @@ def download_pdf():
         225,
         f"Use Fertilizer : {session.get('fertilizer')}"
     )
+
+    pdf.drawString(
+    60,
+    205,
+    f"Irrigation Advice : {session.get('irrigation')}"
+)
 
     # ===========================
     # FOOTER
