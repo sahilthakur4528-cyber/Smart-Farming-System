@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 
-<title>Result</title>
+<title>Prediction Result</title>
 
 <style>
 
@@ -15,7 +16,7 @@ background:#e8f5e9;
 
 .container{
 
-width:500px;
+width:550px;
 margin:40px auto;
 background:white;
 padding:25px;
@@ -31,9 +32,20 @@ text-align:center;
 
 }
 
+.result-box{
+
+background:#f8fff8;
+padding:15px;
+border-left:5px solid green;
+margin-bottom:15px;
+border-radius:5px;
+
+}
+
 p{
 
 font-size:18px;
+margin:12px 0;
 
 }
 
@@ -46,6 +58,22 @@ color:white;
 border:none;
 font-size:16px;
 cursor:pointer;
+border-radius:5px;
+
+}
+
+button:hover{
+
+background:darkgreen;
+
+}
+
+.footer{
+
+margin-top:25px;
+text-align:center;
+color:green;
+font-weight:bold;
 
 }
 
@@ -57,23 +85,38 @@ cursor:pointer;
 
 <div class="container">
 
-<h2>🌾 Prediction Result</h2>
+<h2>🌾 Smart Farming Prediction Result</h2>
 
-<p><b>Recommended Crop:</b> {{ crop }}</p>
+<div class="result-box">
 
-<p><b>Recommended Fertilizer:</b> {{ fertilizer }}</p>
+<p><b>🌾 Recommended Crop:</b> {{ crop }}</p>
 
-<p><b>Quantity:</b> {{ quantity }}</p>
+<p><b>🌱 Recommended Fertilizer:</b> {{ fertilizer }}</p>
 
-<p><b>Application Method:</b> {{ method }}</p>
+<p><b>📦 Quantity:</b> {{ quantity }}</p>
 
-<br>
+<p><b>🧪 Application Method:</b> {{ method }}</p>
+
+<p><b>💧 Irrigation Advice:</b> {{ irrigation }}</p>
+
+</div>
 
 <a href="/download_pdf">
-    <button>📄 Download Report as PDF</button>
+
+<button>
+📄 Download Report as PDF
+</button>
+
 </a>
+
+<div class="footer">
+
+🌾 Wishing You a Healthy Crop and Good Harvest! 🌾
+
+</div>
 
 </div>
 
 </body>
+
 </html>
