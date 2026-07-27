@@ -285,23 +285,34 @@ def download_pdf():
     if "user_id" not in session:
         return redirect("/login")
 
-    # Get Farmer Details
     conn = get_connection()
-    cursor = conn.cursor()
+
+    if conn is None:
+        return "Database connection failed", 500
+
+    cursor = conn.cursor(dictionary=True)
 
     cursor.execute(
         "SELECT * FROM users WHERE id=%s",
         (session["user_id"],)
     )
+
     user = cursor.fetchone()
 
     cursor.execute(
         "SELECT * FROM farmer_profile WHERE user_id=%s",
         (session["user_id"],)
     )
+
     profile = cursor.fetchone()
 
     conn.close()
+
+    if user is None:
+        return "User not found", 404
+
+    if profile is None:
+        return "Farmer profile not found", 404
 
     buffer = BytesIO()
 
@@ -309,262 +320,107 @@ def download_pdf():
 
     pdf.setTitle("Smart Farming Report")
 
-    # ===========================
-    # OUTER BORDER
-    # ===========================
-    pdf.setStrokeColor(colors.darkgreen)
-    pdf.setLineWidth(3)
-    pdf.rect(20,20,570,800)
+    pdf.setFont("Helvetica-Bold", 18)
+    pdf.drawString(100, 780, "SMART FARMING ADVISORY SYSTEM")
 
-    # ===========================
-    # HEADER
-    # ===========================
-    pdf.setFillColor(colors.darkgreen)
-    pdf.rect(20,760,570,60,fill=1)
+    pdf.setFont("Helvetica", 12)
+    pdf.drawString(100, 750, "Prediction Report")
 
-    pdf.setFillColor(colors.white)
-    pdf.setFont("Helvetica-Bold",18)
-    pdf.drawCentredString(
-        305,
-        790,
-        "SMART FARMING ADVISORY SYSTEM"
-    )
-
-    pdf.setFont("Helvetica",12)
-    pdf.drawCentredString(
-        305,
-        772,
-        "Prediction Report"
-    )
-
-    pdf.setFillColor(colors.black)
-    pdf.setFont("Helvetica",10)
-
-    pdf.drawRightString(
-        570,
-        745,
-        datetime.now().strftime("%d-%m-%Y %I:%M %p")
-    )
-
-    # ===========================
-    # FARMER INFORMATION
-    # ===========================
-    pdf.setStrokeColor(colors.green)
-
-    pdf.roundRect(
-        40,
-        640,
-        510,
-        80,
-        10
-    )
-
-    pdf.setFont("Helvetica-Bold",13)
-    pdf.drawString(55,700,"Farmer Information")
-
-    pdf.setFont("Helvetica",11)
+    pdf.setFont("Helvetica", 11)
 
     pdf.drawString(
-        60,
-        680,
-        f"Farmer Name : {user['full_name']}"
+        60, 700,
+        f"Farmer Name: {user['full_name']}"
     )
 
     pdf.drawString(
-        60,
-        660,
-        f"Village : {profile['village']}"
+        60, 680,
+        f"Village: {profile['village']}"
     )
 
     pdf.drawString(
-        320,
-        680,
-        f"Soil Type : {profile['soil_type']}"
+        60, 660,
+        f"District: {profile['district']}"
     )
 
     pdf.drawString(
-        320,
-        660,
-        f"Land Area : {profile['land_area']} Acres"
-    )
-
-    # ===========================
-    # PREDICTION DETAILS
-    # ===========================
-    pdf.roundRect(
-        40,
-        520,
-        510,
-        90,
-        10
-    )
-
-    pdf.setFont("Helvetica-Bold",13)
-    pdf.drawString(
-        55,
-        590,
-        "Prediction Details"
-    )
-
-    pdf.setFont("Helvetica",11)
-
-    pdf.drawString(
-        60,
-        565,
-        f"Recommended Crop : {session.get('crop')}"
+        60, 640,
+        f"State: {profile['state']}"
     )
 
     pdf.drawString(
-        60,
-        545,
-        f"Fertilizer : {session.get('fertilizer')}"
+        60, 620,
+        f"Soil Type: {profile['soil_type']}"
     )
 
     pdf.drawString(
-        320,
-        565,
-        f"Quantity : {session.get('quantity')}"
+        60, 600,
+        f"Land Area: {profile['land_area']} Acres"
     )
 
     pdf.drawString(
-        320,
-        545,
-        f"Method : {session.get('method')}"
-    )
-
-    # ===========================
-    # INPUT VALUES
-    # ===========================
-    pdf.roundRect(
-        40,
-        320,
-        510,
-        170,
-        10
-    )
-
-    pdf.setFont("Helvetica-Bold",13)
-    pdf.drawString(
-        55,
-        470,
-        "Input Values"
-    )
-
-    pdf.setFont("Helvetica",11)
-
-    pdf.drawString(
-        60,
-        445,
-        f"Nitrogen : {session.get('nitrogen')}"
+        60, 550,
+        f"Recommended Crop: {session.get('crop', 'N/A')}"
     )
 
     pdf.drawString(
-        60,
-        425,
-        f"Phosphorus : {session.get('phosphorus')}"
+        60, 530,
+        f"Fertilizer: {session.get('fertilizer', 'N/A')}"
     )
 
     pdf.drawString(
-        60,
-        405,
-        f"Potassium : {session.get('potassium')}"
+        60, 510,
+        f"Quantity: {session.get('quantity', 'N/A')}"
     )
 
     pdf.drawString(
-        60,
-        385,
-        f"Temperature : {session.get('temperature')} °C"
+        60, 490,
+        f"Method: {session.get('method', 'N/A')}"
     )
 
     pdf.drawString(
-        320,
-        445,
-        f"Humidity : {session.get('humidity')} %"
+        60, 450,
+        f"Nitrogen: {session.get('nitrogen', 'N/A')}"
     )
 
     pdf.drawString(
-        320,
-        425,
-        f"Rainfall : {session.get('rainfall')} mm"
+        60, 430,
+        f"Phosphorus: {session.get('phosphorus', 'N/A')}"
     )
 
     pdf.drawString(
-        320,
-        405,
-        f"Soil pH : {session.get('ph')}"
-    )
-
-    # ===========================
-    # RECOMMENDATION
-    # ===========================
-    pdf.setFillColor(colors.lightgreen)
-
-    pdf.roundRect(
-    40,
-    190,
-    510,
-    100,
-    10,
-    fill=1
-)
-
-    pdf.setFillColor(colors.black)
-
-    pdf.setFont("Helvetica-Bold",13)
-    pdf.drawString(
-        55,
-        265,
-        "Recommendation"
-    )
-
-    pdf.setFont("Helvetica",11)
-
-    pdf.drawString(
-        60,
-        245,
-        f"Recommended Crop : {session.get('crop')}"
+        60, 410,
+        f"Potassium: {session.get('potassium', 'N/A')}"
     )
 
     pdf.drawString(
-        60,
-        225,
-        f"Use Fertilizer : {session.get('fertilizer')}"
+        60, 390,
+        f"Temperature: {session.get('temperature', 'N/A')} °C"
     )
 
     pdf.drawString(
-    60,
-    205,
-    f"Irrigation Advice : {session.get('irrigation')}"
-)
-
-    # ===========================
-    # FOOTER
-    # ===========================
-    pdf.setFont("Helvetica",10)
-
-    pdf.drawCentredString(
-        305,
-        150,
-        "Thank You for Using Smart Farming Advisory System"
+        60, 370,
+        f"Humidity: {session.get('humidity', 'N/A')} %"
     )
 
-    pdf.drawCentredString(
-        305,
-        132,
-        "Wishing You a Healthy Crop and Good Harvest!"
+    pdf.drawString(
+        60, 350,
+        f"Rainfall: {session.get('rainfall', 'N/A')} mm"
     )
 
-    pdf.line(
-        50,
-        118,
-        540,
-        118
+    pdf.drawString(
+        60, 330,
+        f"Soil pH: {session.get('ph', 'N/A')}"
     )
 
-    pdf.drawCentredString(
-        305,
-        100,
-        "Generated by Smart Farming Advisory System"
+    pdf.drawString(
+        60, 280,
+        f"Irrigation Advice: {session.get('irrigation', 'N/A')}"
+    )
+
+    pdf.drawString(
+        60, 240,
+        f"Generated: {datetime.now().strftime('%d-%m-%Y %I:%M %p')}"
     )
 
     pdf.save()
