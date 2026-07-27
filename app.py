@@ -85,7 +85,11 @@ def login():
         password = request.form["password"]
 
         conn = get_connection()
-        cursor = conn.cursor()
+
+        if conn is None:
+            return "Database connection failed", 500
+
+        cursor = conn.cursor(dictionary=True)
 
         cursor.execute(
             "SELECT * FROM users WHERE email=%s AND password=%s",
@@ -96,10 +100,8 @@ def login():
 
         if user:
 
-            # Save User ID in Session
             session["user_id"] = user["id"]
 
-            # Check Farmer Profile
             cursor.execute(
                 "SELECT * FROM farmer_profile WHERE user_id=%s",
                 (user["id"],)
@@ -107,6 +109,7 @@ def login():
 
             profile = cursor.fetchone()
 
+            cursor.close()
             conn.close()
 
             if profile:
@@ -115,6 +118,7 @@ def login():
                 return redirect("/farmer_profile")
 
         else:
+            cursor.close()
             conn.close()
             return "Invalid Email or Password"
 
