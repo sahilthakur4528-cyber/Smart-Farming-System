@@ -1,16 +1,16 @@
-import os
 import mysql.connector
 
 def get_connection():
     try:
         conn = mysql.connector.connect(
-            host=os.environ.get("sql8.freesqldatabase.com"),
-            user=os.environ.get("sql8833866"),
-            password=os.environ.get("7ngE1JEQJN"),
-            database=os.environ.get("sql8833866"),
-            port=int(os.environ.get("MYSQL_PORT", 3306))
+            host="sql8.freesqldatabase.com",
+            user="sql8833866",
+            password="YOUR_ACTUAL_PASSWORD",
+            database="sql8833866",
+            port=3306
         )
         return conn
+
     except Exception as e:
         print("Database Connection Error:", e)
         return None
