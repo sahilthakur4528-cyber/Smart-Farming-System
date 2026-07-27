@@ -166,7 +166,11 @@ def dashboard():
         return redirect("/login")
 
     conn = get_connection()
-    cursor = conn.cursor()
+
+    if conn is None:
+        return "Database connection failed", 500
+
+    cursor = conn.cursor(dictionary=True)
 
     # User Details
     cursor.execute(
@@ -182,6 +186,7 @@ def dashboard():
     )
     profile = cursor.fetchone()
 
+    cursor.close()
     conn.close()
 
     return render_template(
