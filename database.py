@@ -5,7 +5,7 @@ def get_connection():
         conn = mysql.connector.connect(
             host="sql8.freesqldatabase.com",
             user="sql8833866",
-            password="YOUR_ACTUAL_PASSWORD",
+            password="7ngE1JEQJN",
             database="sql8833866",
             port=3306
         )
