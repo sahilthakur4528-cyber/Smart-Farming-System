@@ -1,128 +1,274 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Smart Farming Advisory System</title>
 
     <link rel="stylesheet"
-      href="{{ url_for('static', filename='css/style.css') }}">
+    href="{{ url_for('static', filename='css/style.css') }}">
 
 </head>
 
 <body>
 
-<div class="container">
+<!-- ================= NAVBAR ================= -->
 
-    <div class="left">
+<nav>
 
-        <div class="title">
+    <div class="logo">
 
-    🌱 SMART FARMING ADVISORY SYSTEM 🌱
+        🌱 Smart Farming
 
-</div>
+    </div>
 
-        <h3>
-            🌾🤖 AI-Powered Crop & Fertilizer Recommendation System 🌱
+    <div class="nav-links">
 
-        </h3>
+        <a href="/login" class="login-btn">Login</a>
 
-        <h4>
-            🚜💡 Using Machine Learning Technology 🧪
-        </h4>
+        <a href="/register" class="register-btn">Register</a>
 
-        <hr>
+    </div>
 
-        <h2>Empowering Farmers with Smart Technology</h2>
+</nav>
+
+<!-- ================= HERO SECTION ================= -->
+
+<section class="hero">
+
+    <div class="hero-text">
+
+        <h3>🌾 AI-Powered Smart Farming</h3>
+
+        <h1>Smart Farming Advisory System</h1>
 
         <p>
-            Welcome to Smart Farming Advisory System,
-            an intelligent web application that helps
-            farmers choose the most suitable crop based
-            on soil nutrients and weather conditions.
-            The system also recommends the appropriate
-            fertilizer and generates a detailed PDF report.
+
+            Helping Farmers Make Better Agricultural
+            Decisions with Artificial Intelligence.
+
         </p>
 
-        <div class="buttons">
+        <ul>
 
-            <a href="/login" class="btn">
+            <li>✔ AI-Based Crop Recommendation</li>
+
+            <li>✔ Smart Fertilizer Recommendation</li>
+
+            <li>✔ Intelligent Irrigation Advice</li>
+
+            <li>✔ Weather-Based Prediction</li>
+
+        </ul>
+
+        <div class="hero-buttons">
+
+            <a href="/login" class="btn-green">
+
                 Login
+
             </a>
 
-            <a href="/register" class="btn">
+            <a href="/register" class="btn-outline">
+
                 Register
+
             </a>
 
         </div>
 
-        <hr>
+    </div>
 
-        <h2>🌟 OUR FEATURES</h2>
+    <div class="hero-image">
 
-        <ul>
-
-            <li>🌾 AI-Based Crop Recommendation</li>
-<li>🧪 Smart Fertilizer Suggestion</li>
-<li>💧 AI-Based Irrigation Advice</li>
-<li>🌦 Weather-Based Prediction</li>
-<li>👨 Farmer Profile Management</li>
-<li>📊 Prediction Dashboard</li>
-<li>📄 Download PDF Report</li>
-<li>🔒 Secure Login System</li>
-<li>⚡ Fast & Easy to Use</li>
-
-        </ul>
-
-        <hr>
-
-        <h2>🛠 TECHNOLOGIES USED</h2>
-
-        <p>
-            Python • Flask • MySQL • Machine Learning •
-            Random Forest • ReportLab PDF
-        </p>
-
-        <hr>
-
-        <h2>🎯 PROJECT OBJECTIVE</h2>
-
-        <p>
-            To assist farmers in making better agricultural
-            decisions by analyzing soil nutrients and
-            weather conditions through Machine Learning.
-        </p>
-
-        <hr>
-
-        <h2>👨‍💻 Developed By</h2>
-
-        <p>
-
-            Student Name : Sahil Kumar Thakur
-
-            <br><br>
-
-            Project : Smart Farming Advisory System
-
-            <br><br>
-
-            Year : 2026
-
-        </p>
+        <img src="{{ url_for('static', filename='images/image.png') }}" alt="Smart Farming">
 
     </div>
 
-    <div class="right">
+</section>
 
-        <img src="{{ url_for('static', filename='images/image.png') }}" alt="Farming Image">
+<!-- ================= FEATURES ================= -->
+
+<section class="features">
+
+    <h2>Our Features</h2>
+
+    <div class="card-container">
+
+        <div class="card">
+
+            <h1>🌾</h1>
+
+            <h3>Crop Recommendation</h3>
+
+            <p>
+
+                Predict the best crop according to soil
+                nutrients using Machine Learning.
+
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h1>🧪</h1>
+
+            <h3>Fertilizer Recommendation</h3>
+
+            <p>
+
+                Get smart fertilizer suggestions based on
+                crop and soil analysis.
+
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h1>💧</h1>
+
+            <h3>Irrigation Advice</h3>
+
+            <p>
+
+                Receive intelligent irrigation advice for
+                efficient water management.
+
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h1>🌦</h1>
+
+            <h3>Weather Prediction</h3>
+
+            <p>
+
+                Analyze weather conditions before making
+                farming decisions.
+
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h1>👨‍🌾</h1>
+
+            <h3>Farmer Profile</h3>
+
+            <p>
+
+                Store farmer details and prediction
+                history securely.
+
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h1>📄</h1>
+
+            <h3>PDF Report</h3>
+
+            <p>
+
+                Download crop prediction reports in
+                professional PDF format.
+
+            </p>
+
+        </div>
 
     </div>
 
-</div>
+</section>
+
+<!-- ================= TECHNOLOGIES ================= -->
+
+<section class="technology">
+
+    <h2>Technologies Used</h2>
+
+    <div class="tech-box">
+
+        <div>🐍 Python</div>
+
+        <div>⚡ Flask</div>
+
+        <div>🗄 MySQL</div>
+
+        <div>🤖 Machine Learning</div>
+
+        <div>🌳 Random Forest</div>
+
+        <div>📄 ReportLab</div>
+
+    </div>
+
+</section>
+
+<!-- ================= ABOUT ================= -->
+
+<section class="about">
+
+    <h2>About Project</h2>
+
+    <p>
+
+        Smart Farming Advisory System is an AI-powered web
+        application developed to help farmers choose the
+        most suitable crop, recommend fertilizers,
+        provide irrigation advice, and generate PDF
+        reports using Machine Learning.
+
+    </p>
+
+</section>
+
+<!-- ================= FOOTER ================= -->
 
 <footer>
 
-© 2026 Smart Farming Advisory System
+    <h2>
+
+        🌱 Smart Farming Advisory System
+
+    </h2>
+
+    <p>
+
+        Empowering Farmers with Smart Technology
+
+    </p>
+
+    <p>
+
+        © 2026 Smart Farming Advisory System.
+        All Rights Reserved.
+
+    </p>
+
+    <br>
+
+    <h3>
+
+        Designed & Developed by
+
+    </h3>
+
+    <p>
+
+        Sahil Kumar Thakur
+
+    </p>
 
 </footer>
 
